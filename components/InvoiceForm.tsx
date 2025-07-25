@@ -2,6 +2,7 @@ import React from 'react'
 import BasicDetails from "./BasicDetails.tsx"
 import ContactDetails from "./ContactDetails.tsx"
 import ItemsList from "./ItemsList.tsx"
+import TaxDetails from "./TaxDetails.tsx"
 
 function InvoiceForm() {
   return (
@@ -11,6 +12,8 @@ function InvoiceForm() {
         </BasicDetails>
         <ContactDetails></ContactDetails>
         <ItemsList></ItemsList>
+        
+        <TaxDetails> </TaxDetails>
     </div>
 
   )
