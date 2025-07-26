@@ -10,8 +10,10 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useInvoice } from '@/context/InvoiceContext'
 
 function ContactDetails() {
+    const {invoice,updateInvoice}=useInvoice()
   return (
     <div>
         <Card>
@@ -22,12 +24,12 @@ function ContactDetails() {
             <div>
                 <div className="grid w-full max-w-sm items-center gap-3 py-2">
                     <h1>From(Your Details)</h1>
-                    <Label htmlFor="sendername">From</Label>
-                    <Input type="text" id="sendername" placeholder="Sender's name" />
+                    <Label htmlFor="fromName">From</Label>
+                    <Input type="text" id="fromName" placeholder="Sender's name" value={invoice.fromName} onChange={(e)=>updateInvoice({fromName:e.target.value})}/>
                 </div>
                 <div className="grid w-full max-w-sm items-center gap-3 py-2">
-                    <Label htmlFor="senderemail">Email</Label>
-                    <Input type="email" id="senderemail" placeholder="Email" />
+                    <Label htmlFor="fromEmail">Email</Label>
+                    <Input type="email" id="fromEmail" placeholder="Email" value={invoice.fromEmail} onChange={(e)=>updateInvoice({fromEmail:e.target.value})}/>
                 </div>
             </div>
 
@@ -35,12 +37,12 @@ function ContactDetails() {
 
                 <div className="grid w-full max-w-sm items-center gap-3 py-2">
                     <h1>To(Client Details)</h1>
-                    <Label htmlFor="recieverName">From</Label>
-                    <Input type="text" id="recieverName" placeholder="Reciever's name" />
+                    <Label htmlFor="toName">From</Label>
+                    <Input type="text" id="toName" placeholder="Reciever's name" value={invoice.toName} onChange={(e)=>updateInvoice({toName:e.target.value})} />
                 </div>
                 <div className="grid w-full max-w-sm items-center gap-3 py-2">
-                    <Label htmlFor="recieveremail">Email</Label>
-                    <Input type="email" id="recieveremail" placeholder="Reciever Email" />
+                    <Label htmlFor="toEmail">Email</Label>
+                    <Input type="email" id="toEmail" placeholder="Reciever Email" value={invoice.toEmail} onChange={(e)=>updateInvoice({toEmail:e.target.value})}/>
                 </div>
             </div>
 

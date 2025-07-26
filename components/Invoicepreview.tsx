@@ -104,7 +104,7 @@ function Invoicepreview() {
                     Tax(10%):
                   </span>
                   <span>Rs. 99</span>
-                </div>
+                </div>x
                 <div className="flex justify-between font-bold text-lg border-t pt-2">
                   <span>Total:</span>
                   <span>Rs. 99</span>
