@@ -11,28 +11,31 @@ import {
 import { Button } from './ui/button'
 import { Plus } from 'lucide-react'
 import InvoiceItem from './InvoiceItem'
+import { useInvoice } from '@/context/InvoiceContext'
 
-
-export const items=[{
-    id : "1",
-    description:"Website Design",
-    quantity:1,
-    rate : 120,
-    amount:120
-},
-{
-    id : "2",
-    description:"Hosting (12 months)",
-    quantity:1,
-    rate : 500,
-    amount:500
-}
-]
+// Demo data used just for ui purposes now we will be using context api
+// export const items=[{
+//     id : "1",
+//     description:"Website Design",
+//     quantity:1,
+//     rate : 120,
+//     amount:120
+// },
+// {
+//     id : "2",
+//     description:"Hosting (12 months)",
+//     quantity:1,
+//     rate : 500,
+//     amount:500
+// }
+// ]
 
 function ItemsList() {
-        function addItem(){
-            console.log("Have Sex")
-        }
+
+    const {invoice , addItem}= useInvoice()
+        // function addItem(){
+        //     console.log("Have fun")
+        // }
     return (
         
         <Card>
@@ -45,11 +48,11 @@ function ItemsList() {
 
     </CardHeader>
     <CardContent className='space-y-4'>
-        {items.map((item,index)=>(
+        {invoice.items.map((item,index)=>(
             <InvoiceItem key={item.id}
             item={item}
             index={index}
-            canRemove={items.length>1}/>
+            canRemove={invoice.items.length>1}/>
         ))}
 
     </CardContent>

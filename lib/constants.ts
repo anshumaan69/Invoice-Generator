@@ -15,6 +15,7 @@ export const initialInvoiceData: InvoiceData = {
       rate: 0,
       amount: 0,
     },
+
   ],
   taxRate: 10,
   subTotal: 0,
