@@ -2,9 +2,17 @@ import React from 'react'
 import { Button } from './ui/button'
 import { Download } from 'lucide-react'
 import { Card,CardContent } from './ui/card'
+import { useInvoice } from '@/context/InvoiceContext'
+import { formatDate } from '@/utils/formatters'
 
 
-function Invoicepreview() {
+interface InvoicePreviewProps{
+  onBack :()=>void
+}
+
+
+function Invoicepreview({onBack}:InvoicePreviewProps) {
+  const{invoice}=useInvoice()
   return (
     <div className='min-h-screen bg-gray-50 p-4'>
       <div className="max-width-4xl mx-auto ">
@@ -13,7 +21,7 @@ function Invoicepreview() {
             Invoice Preview
           </h1>
             <div className="space-x-2">
-              <Button variant="outline" >Back to edit</Button>
+              <Button variant="outline" onClick={onBack}>Back to edit</Button>
               <Button>
                 <Download className='w-4 h-4 mr-2'></Download>
                 Download PDF
@@ -29,12 +37,12 @@ function Invoicepreview() {
                   
                 </h2>
                 <p className='text-gray-600'>
-                  #234567899
+                  #{invoice.invoiceNumber}
                 </p>
               </div>
               <div className="text-right ">
                 <p className='text-sm text-gray-600'>
-                  Date : 12/32/28
+                  Date : {formatDate(invoice.date)}
 
                 </p>
               </div>
@@ -44,13 +52,13 @@ function Invoicepreview() {
             <div className="grid grid-cols-2 gap-8 mb-8">
               <div>
                 <h3 className="font-semibold mb-2">From:</h3>
-                <p className="font-medium">test</p>
-                <p className="text-gray-600">test@gmail.com</p>
+                <p className="font-medium">{invoice.fromName}</p>
+                <p className="text-gray-600">{invoice.fromEmail}</p>
               </div>
               <div>
                 <h3 className="font-semibold mb-2">To:</h3>
-                <p className="font-medium">John Doe</p>
-                <p className="text-gray-600">john@gmail.com</p>
+                <p className="font-medium">{invoice.toName}</p>
+                <p className="text-gray-600">{invoice.toEmail}</p>
               </div>
             </div>
 
@@ -67,7 +75,7 @@ function Invoicepreview() {
                 </tr>
               </thead>
               <tbody>
-                {items.map((item) => (
+                {invoice.items.map((item:any) => (
                   <tr key={item.id} className="border-b">
                     <td className="py-2">{item.description}</td>
                     <td className="py-2 text-center">{item.quantity}</td>
@@ -97,17 +105,17 @@ function Invoicepreview() {
               <div className="w-64 space-y-2">
                 <div className="flex justify-between">
                   <span>Subtotal:</span>
-                  <span>Rs. 2132</span>
+                  <span>Rs.{(invoice.subTotal.toFixed(2))}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>
-                    Tax(10%):
+                    Tax ({typeof invoice.taxRate==="number"?invoice.taxRate :0}%):
                   </span>
-                  <span>Rs. 99</span>
-                </div>x
+                  <span>Rs. {invoice.taxAmount.toFixed(2)}</span>
+                </div>
                 <div className="flex justify-between font-bold text-lg border-t pt-2">
                   <span>Total:</span>
-                  <span>Rs. 99</span>
+                  <span>Rs.{invoice.total.toFixed(2)}</span>
                 </div>
               </div>
             </div>

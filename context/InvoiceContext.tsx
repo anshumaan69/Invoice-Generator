@@ -2,7 +2,8 @@
 import { InvoiceData, InvoiceItem } from "@/types/invoice";
 import { createContext, ReactNode, useState, useContext } from "react";
 import { initialInvoiceData } from "@/lib/constants";
-import InvoiceItem from "@/components/InvoiceItem";
+import { calculateTotals } from "@/utils/calculations";
+
 
 interface InvoiceContextType {
   invoice: InvoiceData;
